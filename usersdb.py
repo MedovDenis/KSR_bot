@@ -24,7 +24,7 @@ def get_users():
         cursor = sqlite_connection.cursor()
         cursor.execute(sqlite_create_table_query)
         record = cursor.fetchall()
-        print(record)
+        # print(record)
 
         cursor.close()
 
