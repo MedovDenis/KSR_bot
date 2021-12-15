@@ -1,4 +1,3 @@
-from os import replace
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.types.input_media import InputMediaPhoto
@@ -18,14 +17,14 @@ async def process_start_command(msg: types.Message):
     '''Меню бота:
     1. Пройти опрос /vote
     2. Узнать результаты опроса /resvote
-    2. Неблагоприятные условия Советского района /causes
+    2. Возможные неблагоприятные условия на улицах города /causes
     3. Результаты исследований Советсткого района /research
     4. Решение проблем Советского района /solution 
     5. Умный город /smartcity''')
 
 @dp.message_handler(commands=['smartcity'])
 async def process_start_command(msg: types.Message):
-    photo1 = [InputMediaPhoto(InputFile('photos/photo1.1.jpg')), InputMediaPhoto(InputFile('photos/photo1.2.jpg'))]
+    photo = [InputMediaPhoto(InputFile('photos/photo11.jpg'))]
     
     await bot.send_message(msg.from_user.id, '''По мнению экспертов, в ближайшем будущем упор будет сделан на экологию — набирают популярность установки, контролирующие уровень грунтовых вод, загрязнения воздуха, сейсмической активности и другие. В стандарт «Умного города» включены такие проекты, как: автоматизация системы управления обращением с твердыми коммунальными отходами, система онлайн-мониторинга воздуха, система онлайн-мониторинга воды. Инженерно-технические подсистемы города Самара и умные решения:
     - Охрана окружающей среды;
@@ -33,7 +32,7 @@ async def process_start_command(msg: types.Message):
     - Системы мониторинга предельных выбросов;
     - Робототехника для проведения измерений;
     - Зеленые технологии. Системы снижающие выбросы СО2 и вредных веществ.''')
-    await bot.send_media_group(msg.from_user.id, photo1)
+    await bot.send_media_group(msg.from_user.id, photo)
    
 @dp.message_handler(commands=['research'])
 async def process_start_command(msg: types.Message):
@@ -105,7 +104,7 @@ async def process_start_command(msg: types.Message):
 @dp.message_handler(commands=['resvote'])
 async def process_start_command(msg: types.Message):
     res = get_users()
-    count_res = len(res)
+    count_res = len(res) - 7
 
     count_moving = 0
     count_tunnel = 0
